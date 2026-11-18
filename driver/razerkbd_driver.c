@@ -4213,7 +4213,6 @@ static ssize_t razer_attr_write_matrix_brightness(struct device *dev, struct dev
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V3_MINI_HYPERSPEED_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_MINI_HYPERSPEED_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4:
-    case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_X:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_PRO:
     case USB_DEVICE_ID_RAZER_JORO:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_75PCT:
@@ -4223,6 +4222,11 @@ static ssize_t razer_attr_write_matrix_brightness(struct device *dev, struct dev
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_TENKEYLESS_HYPERSPEED_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_LOW_PROFILE_TENKEYLESS_HYPERSPEED_WIRED:
         request = razer_chroma_extended_matrix_brightness(VARSTORE, BACKLIGHT_LED, brightness);
+        request.transaction_id.id = 0x1F;
+        break;
+
+    case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_X:
+        request = razer_chroma_extended_matrix_brightness(VARSTORE, ZERO_LED, brightness);
         request.transaction_id.id = 0x1F;
         break;
 
@@ -4395,13 +4399,17 @@ static ssize_t razer_attr_read_matrix_brightness(struct device *dev, struct devi
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V3_MINI_HYPERSPEED_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_MINI_HYPERSPEED_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4:
-    case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_X:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_PRO:
     case USB_DEVICE_ID_RAZER_JORO:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_75PCT:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_TENKEYLESS_HYPERSPEED_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_LOW_PROFILE_TENKEYLESS_HYPERSPEED_WIRED:
         request = razer_chroma_extended_matrix_get_brightness(VARSTORE, BACKLIGHT_LED);
+        request.transaction_id.id = 0x1F;
+        break;
+
+    case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_X:
+        request = razer_chroma_extended_matrix_get_brightness(VARSTORE, ZERO_LED);
         request.transaction_id.id = 0x1F;
         break;
 
