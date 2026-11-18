@@ -191,6 +191,20 @@ static const struct razer_key_translation chroma_keys_5[] = {
     { 0 }
 };
 
+// Razer BlackWidow V4 X
+static const struct razer_key_translation chroma_keys_v4_x[] = {
+    { KEY_INSERT, KEY_PREVIOUSSONG },
+    { KEY_HOME, KEY_PLAYPAUSE },
+    { KEY_PAGEUP, KEY_NEXTSONG },
+    { KEY_DELETE, KEY_MUTE },
+    { KEY_F9, RAZER_MACRO_KEY },
+    { KEY_F10, RAZER_GAME_KEY },
+    { KEY_F11, RAZER_BRIGHTNESS_DOWN },
+    { KEY_F12, RAZER_BRIGHTNESS_UP },
+    { KEY_PAUSE, KEY_SLEEP },
+    { 0 }
+};
+
 // Razer BlackWidow V4 75%
 static const struct razer_key_translation chroma_keys_6[] = {
     { KEY_F9, RAZER_MACRO_KEY },
@@ -5102,7 +5116,6 @@ static int razer_event(struct hid_device *hdev, struct hid_field *field, struct 
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V3_PRO_WIRED:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V3_PRO_WIRELESS:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4:
-    case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_X:
     case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_PRO:
     case USB_DEVICE_ID_RAZER_HUNTSMAN_V2:
     case USB_DEVICE_ID_RAZER_DEATHSTALKER_V2:
@@ -5113,6 +5126,10 @@ static int razer_event(struct hid_device *hdev, struct hid_field *field, struct 
     case USB_DEVICE_ID_RAZER_HUNTSMAN_V3_PRO_8KHZ:
     case USB_DEVICE_ID_RAZER_HUNTSMAN_V3_HE_MAGNETIC_TKL_8KHZ:
         translation = find_translation(chroma_keys_5, usage->code);
+        break;
+
+    case USB_DEVICE_ID_RAZER_BLACKWIDOW_V4_X:
+        translation = find_translation(chroma_keys_v4_x, usage->code);
         break;
 
     case USB_DEVICE_ID_RAZER_JORO:
